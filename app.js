@@ -699,7 +699,7 @@ function renderProducts() {
     <div class="product-card">
       <div class="card-image-wrap">
         <img src="${product.image}" alt="${product.title}" loading="lazy">
-        ${product.rating >= 4.8 ? `<div class="amz-choice-tag" style="position: absolute; top: 12px; left: 12px; z-index: 2;"><i class="fa-solid fa-check"></i> Amazon's Choice</div>` : ''}
+        ${product.rating >= 4.8 ? `<div class="amz-choice-tag" style="position: absolute; top: 12px; left: 12px; z-index: 2;"><i class="fa-solid fa-check"></i> sexToys Choice</div>` : ''}
         ${product.decibels > 0 ? `<div class="noise-badge" style="top: ${product.rating >= 4.8 ? '40px' : '12px'};"><i class="fa-solid fa-volume-xmark"></i> ${product.decibels} dB Quiet</div>` : ''}
         <button class="wishlist-btn-card ${state.wishlist.has(product.id) ? 'active' : ''}" onclick="toggleWishlist('${product.id}')">
           <i class="${state.wishlist.has(product.id) ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
