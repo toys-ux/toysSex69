@@ -135,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAgeGate();
   initNavigation();
   initCatalog();
+  initGuideSection();
   initVisualizer();
   initQuiz();
   initAtmosphereStudio();
@@ -171,6 +172,50 @@ function initNavigation() {
       mainNav.classList.toggle('active');
     });
   }
+}
+
+// --- Systematic Intimacy Guide Section ---
+function initGuideSection() {
+  const tabBtns = document.querySelectorAll('.guide-tab-btn');
+  const contentMap = {
+    female:  document.getElementById('guideFemale'),
+    male:    document.getElementById('guideMale'),
+    couples: document.getElementById('guideCouples'),
+    sensory: document.getElementById('guideSensory'),
+    safety:  document.getElementById('guideSafety'),
+  };
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Update active tab button
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Hide all content panels
+      Object.values(contentMap).forEach(panel => {
+        if (panel) panel.classList.add('hidden');
+      });
+
+      // Show selected panel with fade-in
+      const target = btn.dataset.guideTarget;
+      const panel = contentMap[target];
+      if (panel) {
+        panel.classList.remove('hidden');
+        panel.style.animation = 'none';
+        panel.offsetHeight; // reflow
+        panel.style.animation = 'fadeInGuide 0.4s ease';
+      }
+
+      const labelMap = {
+        female:  'Female Devices Guide',
+        male:    'Male Devices Guide',
+        couples: 'Couples Synergy Guide',
+        sensory: 'Temperature & Sensory Guide',
+        safety:  'Condoms & Lubricants Guide',
+      };
+      showToast(`<i class="fa-solid fa-book-open"></i> ${labelMap[target]}`);
+    });
+  });
 }
 
 // --- Stealth / Discreet Mode Toggle ---
