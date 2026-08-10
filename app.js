@@ -365,6 +365,40 @@ const products = [
     intensity: 'Warming Melt Sensation',
     shortDesc: 'Luxury soy wax massage candle that melts into warm shea butter massage oil — pour and play.',
     longDesc: 'Burn for 20 minutes then pour the melted shea butter and jojoba oil blend onto the skin for a warm, sensual glide massage. Notes of sandalwood, black rose, and vanilla musk. 200g / 40-hour burn time. Vegan, phthalate-free.'
+  },
+  {
+    id: 'prod-21',
+    title: 'Mythic Dragon Spike Textured Condoms',
+    category: 'protection',
+    categoryName: 'Protection & Safety',
+    price: 29.00,
+    rating: 4.9,
+    reviews: 184,
+    image: 'images/dragon_condom.jpg',
+    decibels: 0,
+    material: 'satin',
+    materialName: 'Fantasy Textured Latex & Silicone',
+    waterproof: 'N/A',
+    intensity: 'Dragon-Scale Ribbed & Spiked Tactile Sensation',
+    shortDesc: 'Fantasy dragon-scale textured sleeve & ribbed condom for intense friction play and climax escalation.',
+    longDesc: 'Engineered with raised dragon scales, soft flexible nodules, and a snug elastic base. Crafted from premium hypoallergenic latex & body-safe silicone to deliver intense friction and sensation for both partners. 5-pack included.'
+  },
+  {
+    id: 'prod-22',
+    title: 'Aura Custom Sculpted Silicone Pocket Stroker',
+    category: 'male',
+    categoryName: 'Male Pleasure',
+    price: 149.00,
+    rating: 4.8,
+    reviews: 112,
+    image: 'images/custom_stroker.jpg',
+    decibels: 0,
+    material: 'silicone',
+    materialName: 'Ultra-Soft SkinSafe™ Silicone',
+    waterproof: '100% Submersible',
+    intensity: 'Custom Adjustable Tightness & Suction',
+    shortDesc: 'Dual-ended custom silicone pocket stroker with adjustable suction valve and realistic inner sleeve.',
+    longDesc: 'Customizable internal tightness and textured nodes mimic natural warmth and suction. Crafted from non-porous SkinSafe™ silicone with a squeezable ergonomic outer shell, vacuum control valve, and dual entry ports. Easy to clean and sterilize.'
   }
 ];
 
