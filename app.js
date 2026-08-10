@@ -582,6 +582,21 @@ function initDiscreetMode() {
 }
 
 // --- Product Catalog Engine ---
+function filterCategory(category) {
+  state.activeCategory = category;
+  const filterTabs = document.querySelectorAll('#categoryFilterTabs .filter-tab');
+  filterTabs.forEach(t => {
+    if (t.dataset.category === category) t.classList.add('active');
+    else t.classList.remove('active');
+  });
+  renderProducts();
+
+  const catalogSection = document.getElementById('catalog');
+  if (catalogSection) {
+    catalogSection.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
 function initCatalog() {
   renderProducts();
 
@@ -590,8 +605,9 @@ function initCatalog() {
   filterTabs.forEach(tab => {
     tab.addEventListener('click', (e) => {
       filterTabs.forEach(t => t.classList.remove('active'));
-      e.target.classList.add('active');
-      state.activeCategory = e.target.dataset.category;
+      const targetBtn = e.currentTarget || e.target;
+      targetBtn.classList.add('active');
+      state.activeCategory = targetBtn.dataset.category;
       renderProducts();
     });
   });
