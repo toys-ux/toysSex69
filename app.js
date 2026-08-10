@@ -465,6 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initDiscreetMode();
   initSearch();
   initCart();
+  initBundleBuilder();
 });
 
 // --- Age Verification Gate ---
@@ -1124,4 +1125,90 @@ function showToast(message) {
   setTimeout(() => {
     toast.remove();
   }, 3500);
+}
+
+// --- Custom VIP Intimacy Bundle Builder Logic ---
+function initBundleBuilder() {
+  const deviceSelect = document.getElementById('bundleDeviceSelect');
+  if (deviceSelect) {
+    updateBundleSummary();
+  }
+}
+
+function updateBundleSummary() {
+  const devSelect = document.getElementById('bundleDeviceSelect');
+  const lubeSelect = document.getElementById('bundleLubeSelect');
+  const accSelect = document.getElementById('bundleAccessorySelect');
+
+  if (!devSelect || !lubeSelect || !accSelect) return;
+
+  const devProd = products.find(p => p.id === devSelect.value);
+  const lubeProd = products.find(p => p.id === lubeSelect.value);
+  const accProd = products.find(p => p.id === accSelect.value);
+
+  if (devProd) {
+    document.getElementById('bundleDevicePreview').innerHTML = `
+      <img src="${devProd.image}" alt="${devProd.title}">
+      <div>
+        <h5>${devProd.title}</h5>
+        <span>$${devProd.price.toFixed(2)}</span>
+      </div>
+    `;
+  }
+
+  if (lubeProd) {
+    document.getElementById('bundleLubePreview').innerHTML = `
+      <img src="${lubeProd.image}" alt="${lubeProd.title}">
+      <div>
+        <h5>${lubeProd.title}</h5>
+        <span>$${lubeProd.price.toFixed(2)}</span>
+      </div>
+    `;
+  }
+
+  if (accProd) {
+    document.getElementById('bundleAccessoryPreview').innerHTML = `
+      <img src="${accProd.image}" alt="${accProd.title}">
+      <div>
+        <h5>${accProd.title}</h5>
+        <span>$${accProd.price.toFixed(2)}</span>
+      </div>
+    `;
+  }
+
+  const subtotal = (devProd ? devProd.price : 0) + (lubeProd ? lubeProd.price : 0) + (accProd ? accProd.price : 0);
+  const finalPrice = subtotal * 0.85; // 15% discount
+
+  document.getElementById('bundleOriginalPrice').textContent = `$${subtotal.toFixed(2)}`;
+  document.getElementById('bundleFinalPrice').textContent = `$${finalPrice.toFixed(2)}`;
+}
+
+function addBundleToCart() {
+  const devSelect = document.getElementById('bundleDeviceSelect');
+  const lubeSelect = document.getElementById('bundleLubeSelect');
+  const accSelect = document.getElementById('bundleAccessorySelect');
+
+  const devProd = products.find(p => p.id === devSelect.value);
+  const lubeProd = products.find(p => p.id === lubeSelect.value);
+  const accProd = products.find(p => p.id === accSelect.value);
+
+  const subtotal = (devProd ? devProd.price : 0) + (lubeProd ? lubeProd.price : 0) + (accProd ? accProd.price : 0);
+  const finalPrice = subtotal * 0.85;
+
+  const bundleItem = {
+    id: `bundle-${Date.now()}`,
+    title: `VIP Intimacy Trio Bundle (${devProd ? devProd.title.split(' ')[0] : 'Device'} + ${lubeProd ? lubeProd.title.split(' ')[0] : 'Lube'} + ${accProd ? accProd.title.split(' ')[0] : 'Accessory'})`,
+    price: finalPrice,
+    image: devProd ? devProd.image : 'images/vibrator1.jpg',
+    qty: 1
+  };
+
+  state.cart.push(bundleItem);
+  updateCartUI();
+  showToast('<i class="fa-solid fa-gift"></i> VIP Trio Bundle (15% OFF) added to your selection!');
+
+  const cartDrawer = document.getElementById('cartDrawer');
+  if (cartDrawer) {
+    cartDrawer.classList.add('open');
+  }
 }

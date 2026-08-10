@@ -59,9 +59,10 @@
       <!-- Desktop Nav Links -->
       <nav class="main-nav">
         <a href="#catalog" class="nav-link active">Boutique Catalog</a>
+        <a href="#bundleBuilder" class="nav-link highlight-link"><i class="fa-solid fa-gift"></i> Bundle & Save (15% OFF)</a>
         <a href="#guide" class="nav-link">Intimacy Guide</a>
         <a href="#visualizer" class="nav-link">Vibration Studio</a>
-        <a href="#quiz" class="nav-link highlight-link"><i class="fa-solid fa-wand-magic-sparkles"></i> Intimacy Quiz</a>
+        <a href="#quiz" class="nav-link"><i class="fa-solid fa-wand-magic-sparkles"></i> Intimacy Quiz</a>
         <a href="#moodStudio" class="nav-link">Atmosphere Studio</a>
         <a href="#journal" class="nav-link">Wellness Journal</a>
       </nav>
@@ -432,6 +433,98 @@
       <!-- Product Cards Grid -->
       <div class="product-grid" id="productGrid">
         <!-- Products injected via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Build Your Own Custom Intimacy Bundle Builder Section -->
+  <section class="section bundle-section" id="bundleBuilder">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="sub-heading"><i class="fa-solid fa-gift"></i> VIP Custom Savings</span>
+        <h2 class="section-title">Build Your Own Intimacy Bundle</h2>
+        <p class="section-desc">Select 1 Main Device + 1 Glide/Oil + 1 Accessory to unlock an instant <strong>15% VIP Bundle Discount</strong> &amp; free discreet shipping.</p>
+      </div>
+
+      <div class="bundle-builder-card glass-panel">
+        <div class="bundle-steps-grid">
+          
+          <!-- Step 1: Main Device -->
+          <div class="bundle-step-box">
+            <div class="step-header">
+              <span class="step-num">1</span>
+              <div>
+                <h4>Select Main Device</h4>
+                <p>Choose your primary novelty device</p>
+              </div>
+            </div>
+            <select class="bundle-select" id="bundleDeviceSelect" onchange="updateBundleSummary()">
+              <option value="prod-1" data-price="149">Velvet Rose Dual Wand ($149.00)</option>
+              <option value="prod-2" data-price="119">Rose Quartz Glass Wand ($119.00)</option>
+              <option value="prod-3" data-price="179">Synergy Touch Couples Vibe ($179.00)</option>
+              <option value="prod-5" data-price="169">Aurora Rabbit Dual Climax Vibe ($169.00)</option>
+              <option value="prod-15" data-price="219">Stallion Heated Auto Stroker ($219.00)</option>
+              <option value="prod-23" data-price="129">Aero Wave Air-Pulse Massager ($129.00)</option>
+            </select>
+            <div class="bundle-item-preview" id="bundleDevicePreview">
+              <!-- Dynamically updated -->
+            </div>
+          </div>
+
+          <!-- Step 2: Sensual Lube / Oil -->
+          <div class="bundle-step-box">
+            <div class="step-header">
+              <span class="step-num">2</span>
+              <div>
+                <h4>Select Glide or Oil</h4>
+                <p>Choose your intimate skincare pairing</p>
+              </div>
+            </div>
+            <select class="bundle-select" id="bundleLubeSelect" onchange="updateBundleSummary()">
+              <option value="prod-10" data-price="39">Luxe Water-Based Glide Lube ($39.00)</option>
+              <option value="prod-4" data-price="89">Aphrodite Pheromone Oil Set ($89.00)</option>
+              <option value="prod-20" data-price="49">Soleil Sensual Massage Candle ($49.00)</option>
+            </select>
+            <div class="bundle-item-preview" id="bundleLubePreview">
+              <!-- Dynamically updated -->
+            </div>
+          </div>
+
+          <!-- Step 3: Accessory / Restraint -->
+          <div class="bundle-step-box">
+            <div class="step-header">
+              <span class="step-num">3</span>
+              <div>
+                <h4>Select Accessory</h4>
+                <p>Choose a restraint or enhancement</p>
+              </div>
+            </div>
+            <select class="bundle-select" id="bundleAccessorySelect" onchange="updateBundleSummary()">
+              <option value="prod-16" data-price="45">Scarlet Web Silk Blindfold ($45.00)</option>
+              <option value="prod-6" data-price="109">Noir Velvet Cuff Restraint Set ($109.00)</option>
+              <option value="prod-19" data-price="19">Noir Ultra-Thin Condoms 12-Pack ($19.00)</option>
+              <option value="prod-17" data-price="55">Pearl Kegel Ben Wa Balls ($55.00)</option>
+              <option value="prod-7" data-price="59">Phantom Vibrating Cock Ring ($59.00)</option>
+            </select>
+            <div class="bundle-item-preview" id="bundleAccessoryPreview">
+              <!-- Dynamically updated -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bundle Pricing Summary & Action -->
+        <div class="bundle-summary-footer flex-between">
+          <div class="bundle-price-breakdown">
+            <div class="sub-price">Standard Subtotal: <span id="bundleOriginalPrice" style="text-decoration: line-through; color: var(--color-text-muted);">$0.00</span></div>
+            <div class="vip-discount-badge"><i class="fa-solid fa-tags"></i> 15% VIP Bundle Discount Applied!</div>
+            <div class="final-bundle-price">Bundle Deal: <span id="bundleFinalPrice" class="gradient-text">$0.00</span></div>
+          </div>
+          <button class="btn btn-primary btn-glow btn-lg" onclick="addBundleToCart()">
+            <i class="fa-solid fa-gift"></i> Add Complete VIP Bundle to Cart
+          </button>
+        </div>
+
       </div>
     </div>
   </section>
