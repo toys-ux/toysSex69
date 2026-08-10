@@ -709,13 +709,32 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- Age Verification Gate (18+) ---
 function initAgeGate() {
   const ageGateModal = document.getElementById('ageGateModal');
+  const verifyAgeBtn = document.getElementById('verifyAgeBtn');
+  const exitAgeBtn = document.getElementById('exitAgeBtn');
+
   if (!ageGateModal) return;
 
   if (localStorage.getItem('sexToys_ageVerified') === 'true') {
     ageGateModal.classList.add('verified');
+    ageGateModal.style.display = 'none';
     state.isAgeVerified = true;
   } else {
     ageGateModal.classList.remove('verified');
+    ageGateModal.style.display = 'flex';
+  }
+
+  if (verifyAgeBtn) {
+    verifyAgeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      confirmAge(true);
+    });
+  }
+
+  if (exitAgeBtn) {
+    exitAgeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      confirmAge(false);
+    });
   }
 }
 
@@ -724,8 +743,11 @@ function confirmAge(isVerified) {
   if (isVerified) {
     localStorage.setItem('sexToys_ageVerified', 'true');
     state.isAgeVerified = true;
-    if (ageGateModal) ageGateModal.classList.add('verified');
-    showToast('<i class="fa-solid fa-shield-check"></i> Age Verified (18+). Welcome!');
+    if (ageGateModal) {
+      ageGateModal.classList.add('verified');
+      ageGateModal.style.display = 'none';
+    }
+    showToast('<i class="fa-solid fa-shield-check"></i> Age Verified (18+). Welcome to sexToys Storefront!');
   } else {
     alert('Access Denied. You must be 18 years of age or older to enter this store.');
     window.location.href = 'https://www.google.com';
