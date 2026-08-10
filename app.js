@@ -706,36 +706,15 @@ document.addEventListener('DOMContentLoaded', () => {
   initCart();
 });
 
-// --- Age Verification Gate (18+) ---
+// --- Age Verification Gate (18+ Disabled by user request) ---
 function initAgeGate() {
   const ageGateModal = document.getElementById('ageGateModal');
-  const verifyAgeBtn = document.getElementById('verifyAgeBtn');
-  const exitAgeBtn = document.getElementById('exitAgeBtn');
-
   if (!ageGateModal) return;
 
-  if (localStorage.getItem('sexToys_ageVerified') === 'true') {
-    ageGateModal.classList.add('verified');
-    ageGateModal.style.display = 'none';
-    state.isAgeVerified = true;
-  } else {
-    ageGateModal.classList.remove('verified');
-    ageGateModal.style.display = 'flex';
-  }
-
-  if (verifyAgeBtn) {
-    verifyAgeBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      confirmAge(true);
-    });
-  }
-
-  if (exitAgeBtn) {
-    exitAgeBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      confirmAge(false);
-    });
-  }
+  // Always keep hidden for direct storefront access
+  ageGateModal.classList.add('verified', 'hidden');
+  ageGateModal.style.display = 'none';
+  state.isAgeVerified = true;
 }
 
 function confirmAge(isVerified) {
