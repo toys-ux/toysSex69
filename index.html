@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WANDERLUST | Luxury Intimacy & Adult Novelty Boutique</title>
+  <meta name="description" content="Explore Wanderlust's luxury collection of body-safe adult toys, ergonomic vibrators, couples intimacy devices, glass wands, and sensual wellness elixirs. 100% discrete packaging.">
+  <meta name="keywords" content="luxury adult toys, sensual wellness, ergonomic vibrators, couples intimacy, body safe silicone, discrete adult novelties">
+  
+  <!-- Google Fonts: Cinzel & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-dark">
+
+  <!-- Ambient Glow Overlay Background -->
+  <div class="ambient-glow-container" id="ambientContainer">
+    <div class="glow-orb orb-primary"></div>
+    <div class="glow-orb orb-secondary"></div>
+    <div class="glow-orb orb-accent"></div>
+  </div>
+
+  <!-- Stealth / Discreet Disguise Alert Banner -->
+  <div id="discreetBanner" class="discreet-banner hidden">
+    <div class="container banner-inner">
+      <span><i class="fa-solid fa-user-shield"></i> <strong>Discreet Browsing Active:</strong> App disguised as <em>Lumina Home Spa & Fragrance</em>. Billing descriptor: <code>WL Boutique LLC</code></span>
+      <button class="btn-text-sm" id="disableDiscreetBtn">Exit Discreet View</button>
+    </div>
+  </div>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-announcement">
+    <div class="container ann-content">
+      <div class="ann-item"><i class="fa-solid fa-box-open"></i> 100% Discreet Packaging Guarantee</div>
+      <div class="ann-item"><i class="fa-solid fa-shield-halved"></i> 100% Body-Safe Medical Silicone</div>
+      <div class="ann-item"><i class="fa-solid fa-truck-fast"></i> Free Express Shipping on Orders Over $75</div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="brand-logo" id="brandLogo">
+        <span class="logo-icon"><i class="fa-solid fa-gem"></i></span>
+        <div class="logo-text">
+          <span class="brand-title" id="brandTitleText">WANDERLUST</span>
+          <span class="brand-subtitle" id="brandSubtext">LUXURY INTIMACY BOUTIQUE</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="main-nav">
+        <a href="#catalog" class="nav-link active">Boutique Catalog</a>
+        <a href="#visualizer" class="nav-link">Vibration Studio</a>
+        <a href="#quiz" class="nav-link highlight-link"><i class="fa-solid fa-wand-magic-sparkles"></i> Intimacy Quiz</a>
+        <a href="#moodStudio" class="nav-link">Atmosphere Studio</a>
+        <a href="#journal" class="nav-link">Wellness Journal</a>
+      </nav>
+
+      <!-- Header Action Controls -->
+      <div class="header-actions">
+        <!-- Stealth / Discreet Mode Toggle Button -->
+        <button class="discreet-toggle-btn" id="toggleDiscreetBtn" title="Toggle Stealth Privacy Mode">
+          <i class="fa-solid fa-eye-slash"></i>
+          <span class="discreet-btn-text">Discreet Mode</span>
+        </button>
+
+        <!-- Search Button -->
+        <button class="icon-action-btn" id="searchToggleBtn" title="Search Catalog">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+        <!-- Wishlist Button -->
+        <button class="icon-action-btn" id="wishlistToggleBtn" title="View Wishlist">
+          <i class="fa-regular fa-heart"></i>
+          <span class="badge" id="wishlistBadge">0</span>
+        </button>
+
+        <!-- Shopping Cart Trigger -->
+        <button class="icon-action-btn cart-trigger" id="cartToggleBtn" title="Open Shopping Cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="badge" id="cartBadge">0</span>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Live Search Overlay Modal -->
+  <div class="search-overlay hidden" id="searchOverlay">
+    <div class="search-modal-card">
+      <div class="search-header">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="searchInput" placeholder="Search by vibration style, body-safe material, couples play, glass wands..." autocomplete="off">
+        <button class="close-search-btn" id="closeSearchBtn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="search-quick-tags">
+        <span>Popular:</span>
+        <button class="tag-btn" data-search="dual motor">Dual Motor</button>
+        <button class="tag-btn" data-search="whisper quiet">Whisper Quiet</button>
+        <button class="tag-btn" data-search="couples">Couples</button>
+        <button class="tag-btn" data-search="glass">Sculpted Glass</button>
+        <button class="tag-btn" data-search="app">App Controlled</button>
+      </div>
+      <div class="search-results-list" id="searchResultsList">
+        <!-- Dynamic Search Results -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Banner Section -->
+  <section class="hero-section" id="hero">
+    <div class="hero-bg-overlay"></div>
+    <div class="container hero-content">
+      <div class="hero-badge animate-fade-down">
+        <span class="sparkle"><i class="fa-solid fa-star"></i></span> Sensual Wellness & Luxury Novelties
+      </div>
+      <h1 class="hero-title animate-fade-up" id="heroTitle">
+        Awaken Your Deepest <span class="gradient-text">Fantasy & Desire</span>
+      </h1>
+      <p class="hero-description animate-fade-up" id="heroDesc">
+        Immerse yourself in precision-engineered luxury vibrators, couples intimate devices, hand-sculpted wands, and pheromone oils. Crafted with 100% body-safe medical silicone and whisper-quiet motors.
+      </p>
+
+      <div class="hero-cta-group animate-fade-up">
+        <a href="#catalog" class="btn btn-primary btn-glow">
+          <span>Explore Novelty Collection</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <a href="#quiz" class="btn btn-secondary glass-btn">
+          <i class="fa-solid fa-compass"></i>
+          <span>Take Intimacy Quiz</span>
+        </a>
+      </div>
+
+      <!-- Key Trust Features Bar -->
+      <div class="hero-trust-grid">
+        <div class="trust-card">
+          <div class="trust-icon"><i class="fa-solid fa-box-open"></i></div>
+          <div class="trust-info">
+            <h4>100% Discrete Package</h4>
+            <p>Plain unbranded brown boxes with non-descript billing labels.</p>
+          </div>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon"><i class="fa-solid fa-volume-xmark"></i></div>
+          <div class="trust-info">
+            <h4>Whisper Motor Technology</h4>
+            <p>Ultra-quiet vibration technology below 35 dB sound profiles.</p>
+          </div>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon"><i class="fa-solid fa-shield-heart"></i></div>
+          <div class="trust-info">
+            <h4>100% Body-Safe Guarantee</h4>
+            <p>Phthalate-free, non-porous medical silicone & crystal glass.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Vibration Waveform Studio Section -->
+  <section class="section visualizer-section" id="visualizer">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="sub-heading">Tactile Soundwave Technology</span>
+        <h2 class="section-title">Interactive Vibration Pattern Studio</h2>
+        <p class="section-desc">Experience our signature whisper-quiet motor vibration profiles. Select a pattern below to preview tactile waves and pulse speeds in real time.</p>
+      </div>
+
+      <div class="visualizer-card glass-panel">
+        <div class="visualizer-display">
+          <canvas id="vibroCanvas" width="800" height="220"></canvas>
+          <div class="vibro-status-overlay">
+            <span class="pulse-indicator" id="pulseIndicator"></span>
+            <span id="activePatternName">Pattern: Escalating Pulse</span>
+            <span id="activeDecibel">Noise Level: 32 dB (Whisper)</span>
+          </div>
+        </div>
+
+        <div class="visualizer-controls">
+          <div class="pattern-buttons-grid">
+            <button class="vibro-btn active" data-pattern="pulse">
+              <i class="fa-solid fa-bolt"></i> Pulse Wave
+            </button>
+            <button class="vibro-btn" data-pattern="escalate">
+              <i class="fa-solid fa-chart-line"></i> Escalating Thrill
+            </button>
+            <button class="vibro-btn" data-pattern="rhythm">
+              <i class="fa-solid fa-heart-pulse"></i> Fantasy Rhythm
+            </button>
+            <button class="vibro-btn" data-pattern="ocean">
+              <i class="fa-solid fa-water"></i> Ocean Tides
+            </button>
+            <button class="vibro-btn" data-pattern="thrum">
+              <i class="fa-solid fa-fire"></i> Deep Velvet Thrum
+            </button>
+          </div>
+
+          <div class="speed-slider-group">
+            <label for="speedRange"><i class="fa-solid fa-gauge-high"></i> Motor Intensity Speed:</label>
+            <input type="range" id="speedRange" min="1" max="10" value="6">
+            <span id="speedValue">Level 6 (Deep Pulse)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Intimacy & Fantasy Match Quiz -->
+  <section class="section quiz-section" id="quiz">
+    <div class="container">
+      <div class="quiz-card glass-panel">
+        <div class="quiz-progress-bar">
+          <div class="progress-fill" id="quizProgressFill" style="width: 25%;"></div>
+        </div>
+
+        <div class="quiz-header">
+          <span class="sub-heading"><i class="fa-solid fa-sparkles"></i> Personalized Discovery</span>
+          <h2 class="quiz-title">Find Your Ultimate Intimacy & Fantasy Match</h2>
+          <p class="quiz-subtitle">Answer 3 quick questions to discover your ideal sensual novelty device and lubricant pairings.</p>
+        </div>
+
+        <!-- Quiz Step 1 -->
+        <div class="quiz-step active" id="quizStep1">
+          <h3>1. What type of sensual experience are you craving today?</h3>
+          <div class="quiz-options-grid">
+            <button class="quiz-opt-card" data-answer="solo-bliss">
+              <div class="opt-icon"><i class="fa-solid fa-moon"></i></div>
+              <h4>Solo Sensual Bliss</h4>
+              <p>Self-exploratory deep relaxation and climax escalation.</p>
+            </button>
+            <button class="quiz-opt-card" data-answer="couples-synergy">
+              <div class="opt-icon"><i class="fa-solid fa-user-group"></i></div>
+              <h4>Couples Intimate Synergy</h4>
+              <p>Hands-free stimulation during lovemaking & remote app control.</p>
+            </button>
+            <button class="quiz-opt-card" data-answer="tactile-fantasy">
+              <div class="opt-icon"><i class="fa-solid fa-feather"></i></div>
+              <h4>Restraints & Sensory Play</h4>
+              <p>Temperature play, silk blindfolds, feather teasers, and massage elixirs.</p>
+            </button>
+            <button class="quiz-opt-card" data-answer="glass-art">
+              <div class="opt-icon"><i class="fa-solid fa-wand-magic"></i></div>
+              <h4>Sculpted Temperature Glass</h4>
+              <p>Elegant weighted glass art wands warmable in water.</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quiz Step 2 -->
+        <div class="quiz-step hidden" id="quizStep2">
+          <h3>2. What vibration intensity and sound profile do you prefer?</h3>
+          <div class="quiz-options-grid">
+            <button class="quiz-opt-card" data-answer="whisper-soft">
+              <div class="opt-icon"><i class="fa-solid fa-feather-pointed"></i></div>
+              <h4>Whisper Soft (&lt; 30 dB)</h4>
+              <p>Subtle, silky flutter sensations for maximum privacy.</p>
+            </button>
+            <button class="quiz-opt-card" data-answer="deep-thrum">
+              <div class="opt-icon"><i class="fa-solid fa-wave-square"></i></div>
+              <h4>Deep Rumbling Thrum</h4>
+              <p>Heavy motor vibration that penetrates deep nerve endings.</p>
+            </button>
+            <button class="quiz-opt-card" data-answer="variable-patterns">
+              <div class="opt-icon"><i class="fa-solid fa-sliders"></i></div>
+              <h4>Multi-Speed Custom Modes</h4>
+              <p>10+ escalating vibration wave options and app control.</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quiz Step 3 -->
+        <div class="quiz-step hidden" id="quizStep3">
+          <h3>3. What material aesthetic inspires your passion?</h3>
+          <div class="quiz-options-grid">
+            <button class="quiz-opt-card" data-answer="silicone">
+              <div class="opt-icon"><i class="fa-solid fa-heart"></i></div>
+              <h4>Velvet Medical Silicone</h4>
+              <p>Soft skin-warm feel, ultra hygienic & 100% waterproof.</p>
+            </button>
+            <button class="quiz-opt-card" data-answer="glass-metal">
+              <div class="opt-icon"><i class="fa-solid fa-gem"></i></div>
+              <h4>Sculpted Crystal Glass & Gold</h4>
+              <p>Smooth, solid weight with temperature sensitivity.</p>
+            </button>
+            <button class="quiz-opt-card" data-answer="silk-oils">
+              <div class="opt-icon"><i class="fa-solid fa-bottle-droplet"></i></div>
+              <h4>Silk & Pheromone Elixirs</h4>
+              <p>Nourishing botanical massage oils and weighted silk restraints.</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quiz Result Screen -->
+        <div class="quiz-result hidden" id="quizResult">
+          <div class="result-badge"><i class="fa-solid fa-crown"></i> Your Perfect Sensual Match</div>
+          <h3 id="resultTitle">The Velvet Rose Dual Sensation Wand</h3>
+          <p id="resultDesc">Based on your preferences, this ultra-quiet dual motor vibrator with velvet medical silicone offers deep rumbling bliss and discreet elegance.</p>
+
+          <div class="result-product-card" id="resultProductCard">
+            <!-- Dynamic Result Card Content -->
+          </div>
+
+          <button class="btn btn-secondary" id="restartQuizBtn"><i class="fa-solid fa-rotate-left"></i> Retake Quiz</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Product Catalog Section -->
+  <section class="section catalog-section" id="catalog">
+    <div class="container">
+      <div class="section-header flex-between">
+        <div>
+          <span class="sub-heading">Curated Sensual Collection</span>
+          <h2 class="section-title">Explore Luxury Novelties</h2>
+        </div>
+        
+        <!-- Sorting dropdown -->
+        <div class="catalog-sort">
+          <label for="sortSelect"><i class="fa-solid fa-arrow-down-short-wide"></i> Sort By:</label>
+          <select id="sortSelect">
+            <option value="featured">Featured Sensations</option>
+            <option value="rating">Highest Rated</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="quietest">Quietest Sound Profile</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Filter Controls Bar -->
+      <div class="filter-controls-bar glass-panel">
+        <div class="filter-tabs" id="categoryFilterTabs">
+          <button class="filter-tab active" data-category="all">All Novelties</button>
+          <button class="filter-tab" data-category="vibrators">Vibrators & Wands</button>
+          <button class="filter-tab" data-category="couples">Couples Synergy</button>
+          <button class="filter-tab" data-category="glass">Sculpted Glass</button>
+          <button class="filter-tab" data-category="oils">Oils & Restraints</button>
+        </div>
+
+        <div class="filter-dropdowns">
+          <!-- Material Filter -->
+          <select class="filter-select" id="materialFilter">
+            <option value="all">All Materials</option>
+            <option value="silicone">Medical Silicone</option>
+            <option value="glass">Rose Crystal Glass</option>
+            <option value="satin">Satin & Silk</option>
+          </select>
+
+          <!-- Noise Level Filter -->
+          <select class="filter-select" id="noiseFilter">
+            <option value="all">Noise Level (dB)</option>
+            <option value="30">Whisper Quiet (&lt; 30dB)</option>
+            <option value="40">Discreet Hum (&lt; 40dB)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Product Cards Grid -->
+      <div class="product-grid" id="productGrid">
+        <!-- Products injected via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Atmosphere Studio Section (Mood Ambient Lighting & Audio Synth) -->
+  <section class="section mood-studio-section" id="moodStudio">
+    <div class="container">
+      <div class="mood-card glass-panel text-center">
+        <span class="sub-heading"><i class="fa-solid fa-sliders"></i> Sensual Environment</span>
+        <h2 class="section-title">Atmosphere & Mood Studio</h2>
+        <p class="section-desc">Adjust the room lighting theme and turn on relaxing ambient synthesizer tones to create an intimate atmosphere.</p>
+
+        <div class="mood-themes-grid">
+          <button class="mood-theme-btn active" data-mood="velvet" data-color="#700b38">
+            <span class="color-dot" style="background: #700b38;"></span>
+            <span class="mood-name">Velvet Burgundy</span>
+          </button>
+          <button class="mood-theme-btn" data-mood="crimson" data-color="#b00c3b">
+            <span class="color-dot" style="background: #b00c3b;"></span>
+            <span class="mood-name">Crimson Pulse</span>
+          </button>
+          <button class="mood-theme-btn" data-mood="amethyst" data-color="#5c1d8f">
+            <span class="color-dot" style="background: #5c1d8f;"></span>
+            <span class="mood-name">Amethyst Mystique</span>
+          </button>
+          <button class="mood-theme-btn" data-mood="gold" data-color="#b88b2a">
+            <span class="color-dot" style="background: #b88b2a;"></span>
+            <span class="mood-name">Champagne Gold</span>
+          </button>
+        </div>
+
+        <div class="audio-synth-box">
+          <div class="audio-info">
+            <i class="fa-solid fa-music audio-icon"></i>
+            <span>Ambient Drone Audio Synthesizer (Web Audio API)</span>
+          </div>
+          <button class="btn btn-primary" id="toggleAmbientAudioBtn">
+            <i class="fa-solid fa-play"></i> Start Ambient Waves
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Intimacy Journal Section -->
+  <section class="section journal-section" id="journal">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="sub-heading">Sensual Wellness & Education</span>
+        <h2 class="section-title">The Red Velvet Journal</h2>
+        <p class="section-desc">Expert advice on body safety, couples communication, material care, and sensual exploration.</p>
+      </div>
+
+      <div class="journal-grid">
+        <article class="journal-card glass-panel">
+          <div class="journal-tag">Body Safety</div>
+          <h3>Why Medical-Grade Silicone Matters for Intimacy</h3>
+          <p>Learn how non-porous medical silicone preserves skin health, prevents bacterial buildup, and delivers skin-warm sensation.</p>
+          <a href="#" class="read-more-link" onclick="event.preventDefault(); alert('Article: Medical Silicone is 100% hypoallergenic, non-porous, phthalate-free, and safe with water-based lubricants.');">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+
+        <article class="journal-card glass-panel">
+          <div class="journal-tag">Couples Guide</div>
+          <h3>Introducing Toys into Couples Play Seamlessly</h3>
+          <p>Discover how remote app-controlled vibrators and ergonomic devices enhance connection and heighten climax together.</p>
+          <a href="#" class="read-more-link" onclick="event.preventDefault(); alert('Article: Communication and mutual exploration are key. Start with warm massage oils and low vibration modes during intimacy.');">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+
+        <article class="journal-card glass-panel">
+          <div class="journal-tag">Care & Longevity</div>
+          <h3>Temperature Play with Sculpted Glass Wands</h3>
+          <p>Safely warm or chill rose crystal glass in water baths for sensational temperature variations during sensory play.</p>
+          <a href="#" class="read-more-link" onclick="event.preventDefault(); alert('Article: Glass wands can be placed in warm water or cooled in ice water. Always test temperature against sensitive wrist skin first.');">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col brand-col">
+        <div class="logo-text">
+          <span class="brand-title">WANDERLUST</span>
+          <span class="brand-subtitle">LUXURY INTIMACY BOUTIQUE</span>
+        </div>
+        <p class="footer-desc">Crafting high-precision sensual devices for solo and couples fulfillment. 100% discrete packaging and body-safe materials guaranteed.</p>
+        <div class="discrete-badge"><i class="fa-solid fa-shield-halved"></i> Discreet Billing: <code>WL BOUTIQUE LLC</code></div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#catalog">Boutique Catalog</a></li>
+          <li><a href="#visualizer">Vibration Studio</a></li>
+          <li><a href="#quiz">Intimacy Quiz</a></li>
+          <li><a href="#moodStudio">Atmosphere Studio</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Privacy & Guarantees</h4>
+        <ul>
+          <li><i class="fa-solid fa-check"></i> Unbranded Plain Box Packaging</li>
+          <li><i class="fa-solid fa-check"></i> 100% Phthalate-Free Silicone</li>
+          <li><i class="fa-solid fa-check"></i> Discreet Billing Statement</li>
+          <li><i class="fa-solid fa-check"></i> 1-Year Craftsmanship Warranty</li>
+        </ul>
+      </div>
+
+      <div class="footer-col newsletter-col">
+        <h4>Discreet VIP Club</h4>
+        <p>Subscribe for private discounts, sensual guides, and new releases.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed to Discreet VIP List!');">
+          <input type="email" placeholder="Enter private email..." required>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container flex-between">
+        <p>&copy; 2026 Wanderlust Boutique LLC. All rights reserved. 18+ Adult Novelty & Wellness Store.</p>
+        <div class="payment-icons">
+          <i class="fa-brands fa-cc-visa"></i>
+          <i class="fa-brands fa-cc-mastercard"></i>
+          <i class="fa-brands fa-cc-apple-pay"></i>
+          <i class="fa-solid fa-lock"></i> 256-Bit SSL Encrypted
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Product Quick View Modal -->
+  <div class="modal-backdrop hidden" id="productModalBackdrop">
+    <div class="quick-view-modal glass-panel" id="quickViewModal">
+      <button class="close-modal-btn" id="closeProductModalBtn"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-grid" id="modalGridContent">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Shopping Cart Drawer -->
+  <div class="cart-drawer-overlay hidden" id="cartOverlay">
+    <div class="cart-drawer glass-panel">
+      <div class="cart-header">
+        <h3><i class="fa-solid fa-bag-shopping"></i> Your Sensual Selection</h3>
+        <button class="close-cart-btn" id="closeCartBtn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- Free Discreet Shipping Meter -->
+      <div class="shipping-progress-box">
+        <span id="shippingProgressText">Add $75.00 more for FREE Discrete Shipping!</span>
+        <div class="progress-bar"><div class="progress-fill" id="shippingProgressFill" style="width: 0%;"></div></div>
+      </div>
+
+      <div class="cart-items-list" id="cartItemsList">
+        <!-- Cart items injected dynamically -->
+      </div>
+
+      <div class="cart-footer">
+        <div class="discreet-shipping-selector">
+          <label><strong>Packaging Style:</strong></label>
+          <div class="packaging-options">
+            <label class="radio-label">
+              <input type="radio" name="packaging" value="discreet" checked>
+              <span>Plain Brown Box (100% Stealth)</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="packaging" value="gift">
+              <span>Velvet Gift Box with Gold Ribbon</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="cart-summary">
+          <div class="summary-line">
+            <span>Subtotal:</span>
+            <span id="cartSubtotal">$0.00</span>
+          </div>
+          <div class="summary-line">
+            <span>Discreet Packaging:</span>
+            <span class="green-text">FREE</span>
+          </div>
+          <div class="summary-line total-line">
+            <span>Total:</span>
+            <span id="cartTotal">$0.00</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-block btn-glow" id="checkoutBtn">
+          <span>Proceed to Discrete Checkout</span>
+          <i class="fa-solid fa-lock"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Confirmation Modal -->
+  <div class="modal-backdrop hidden" id="checkoutModalBackdrop">
+    <div class="checkout-modal glass-panel">
+      <button class="close-modal-btn" id="closeCheckoutBtn"><i class="fa-solid fa-xmark"></i></button>
+      <div class="checkout-header text-center">
+        <i class="fa-solid fa-shield-check checkout-icon"></i>
+        <h2>Discrete SSL Secure Checkout</h2>
+        <p>Your order will arrive in an unbranded plain box. No product names appear on bank statement.</p>
+      </div>
+
+      <form class="checkout-form" id="checkoutForm" onsubmit="event.preventDefault(); handleCheckoutSubmit();">
+        <div class="form-group">
+          <label>Shipping Address</label>
+          <input type="text" placeholder="123 Luxury Lane, Suite 4B" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>City</label>
+            <input type="text" placeholder="New York" required>
+          </div>
+          <div class="form-group">
+            <label>Zip Code</label>
+            <input type="text" placeholder="10001" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Discreet Credit Card Billing</label>
+          <input type="text" placeholder="4532 •••• •••• 8892" required>
+        </div>
+        <div class="discreet-guarantee-note">
+          <i class="fa-solid fa-eye-slash"></i> Statement descriptor will display as <strong>WL BOUTIQUE LLC</strong>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-glow">Complete Order ($<span id="checkoutTotalAmount">0.00</span>)</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Age 18+ Verification Modal (Shows on first visit) -->
+  <div class="modal-backdrop" id="ageGateModal">
+    <div class="age-gate-card glass-panel text-center">
+      <div class="age-icon"><i class="fa-solid fa-shield-cat"></i></div>
+      <h2>Age Verification Required</h2>
+      <p class="age-desc">Wanderlust is a high-end adult novelties and sensual intimacy boutique. You must be 18 years of age or older to enter.</p>
+      <div class="age-btn-group">
+        <button class="btn btn-primary btn-glow" id="ageConfirmBtn">I am 18 or Older — Enter Store</button>
+        <button class="btn btn-secondary" onclick="window.location.href='https://www.google.com';">I am Under 18 — Exit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
