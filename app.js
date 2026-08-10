@@ -399,6 +399,57 @@ const products = [
     intensity: 'Custom Adjustable Tightness & Suction',
     shortDesc: 'Dual-ended custom silicone pocket stroker with adjustable suction valve and realistic inner sleeve.',
     longDesc: 'Customizable internal tightness and textured nodes mimic natural warmth and suction. Crafted from non-porous SkinSafe™ silicone with a squeezable ergonomic outer shell, vacuum control valve, and dual entry ports. Easy to clean and sterilize.'
+  },
+  {
+    id: 'prod-23',
+    title: 'Aero Wave Sonic Air-Pulse Clitoral Massager',
+    category: 'vibrators',
+    categoryName: 'Vibrators & Wands',
+    price: 129.00,
+    rating: 4.9,
+    reviews: 298,
+    image: 'images/air_pulse.jpg',
+    decibels: 26,
+    material: 'silicone',
+    materialName: 'Silky Medical Silicone',
+    waterproof: 'IPX7 Submersible',
+    intensity: 'Contactless Air-Pulsation Waves',
+    shortDesc: 'Contactless air-pulsation technology delivering gentle flutter waves without direct friction.',
+    longDesc: 'Engineered with contactless sonic wave technology that creates rhythmic air pressure pulses around sensitive nerve endings. 11 air-intensity levels, whisper motor under 26dB, USB magnetic charger, and 100% waterproof.'
+  },
+  {
+    id: 'prod-24',
+    title: 'Siren Crystal Jeweled Glass Plug',
+    category: 'anal',
+    categoryName: 'Anal & P-Spot',
+    price: 85.00,
+    rating: 4.8,
+    reviews: 147,
+    image: 'images/jeweled_plug.jpg',
+    decibels: 0,
+    material: 'glass',
+    materialName: 'Borosilicate Glass & Rose Gold Gem',
+    waterproof: '100% Submersible',
+    intensity: 'Smooth Weighted Sensation',
+    shortDesc: 'Hand-cut crystal teardrop glass plug with sparkling rose gold jewel base for sensory & temperature play.',
+    longDesc: 'An exquisite piece of jewelry for intimate play. Teardrop shaped for smooth insertion and comfortable wear, topped with a faceted rose gold crystal gem. Temperature responsive — warm in water or cool in ice. Non-porous and hypoallergenic.'
+  },
+  {
+    id: 'prod-25',
+    title: 'Veluxe Ergonomic Strap-On Harness & Shaft Set',
+    category: 'couples',
+    categoryName: 'Couples Synergy',
+    price: 159.00,
+    rating: 4.9,
+    reviews: 164,
+    image: 'images/strap_on.jpg',
+    decibels: 0,
+    material: 'silicone',
+    materialName: 'Velvet Straps & Medical Silicone',
+    waterproof: 'Waterproof Shaft',
+    intensity: 'Inclusive Shared Pleasure',
+    shortDesc: 'Adjustable velvet-padded dual O-ring harness with flexible hollow medical silicone shaft.',
+    longDesc: 'Designed for total comfort and body inclusivity. Features plush velvet-lined adjustable waist (26"-54") and leg straps, interchangeable brass O-rings, and a realistic hollow silicone shaft with textured internal walls for dual stimulation.'
   }
 ];
 
