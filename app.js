@@ -694,6 +694,7 @@ const products = [
 // --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
   initAgeGate();
+  fetchProducts();
   initNavigation();
   initCatalog();
   initGuideSection();
@@ -703,25 +704,54 @@ document.addEventListener('DOMContentLoaded', () => {
   initDiscreetMode();
   initSearch();
   initCart();
-  initBundleBuilder();
 });
 
-// --- Age Verification Gate ---
+// --- Age Verification Gate (18+) ---
 function initAgeGate() {
   const ageGateModal = document.getElementById('ageGateModal');
-  const ageConfirmBtn = document.getElementById('ageConfirmBtn');
-  
-  if (localStorage.getItem('wanderlust_age_verified') === 'true') {
-    ageGateModal.classList.add('hidden');
-    state.isAgeVerified = true;
-  }
+  if (!ageGateModal) return;
 
-  ageConfirmBtn.addEventListener('click', () => {
-    localStorage.setItem('wanderlust_age_verified', 'true');
+  if (localStorage.getItem('sexToys_ageVerified') === 'true') {
+    ageGateModal.classList.add('verified');
     state.isAgeVerified = true;
-    ageGateModal.classList.add('hidden');
-    showToast('<i class="fa-solid fa-shield-check"></i> Welcome to Wanderlust Luxury Boutique');
-  });
+  } else {
+    ageGateModal.classList.remove('verified');
+  }
+}
+
+function confirmAge(isVerified) {
+  const ageGateModal = document.getElementById('ageGateModal');
+  if (isVerified) {
+    localStorage.setItem('sexToys_ageVerified', 'true');
+    state.isAgeVerified = true;
+    if (ageGateModal) ageGateModal.classList.add('verified');
+    showToast('<i class="fa-solid fa-shield-check"></i> Age Verified (18+). Welcome!');
+  } else {
+    alert('Access Denied. You must be 18 years of age or older to enter this store.');
+    window.location.href = 'https://www.google.com';
+  }
+}
+
+// --- Dynamic JSON Database Fetcher & Fallback Handler ---
+async function fetchProducts() {
+  try {
+    const res = await fetch('products.json');
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data) && data.length > 0) {
+        products = data;
+      }
+    }
+  } catch (err) {
+    console.log('Using built-in product array', err);
+  }
+  renderProducts();
+  initBundleBuilder();
+}
+
+function handleImageError(img) {
+  img.onerror = null;
+  img.src = 'images/placeholder.jpg';
 }
 
 // --- Navigation & Mobile Menu ---
@@ -899,50 +929,57 @@ function renderProducts() {
     filtered.sort((a, b) => (a.decibels || 99) - (b.decibels || 99));
   }
 
-  grid.innerHTML = filtered.map(product => `
-    <div class="product-card">
-      <div class="card-image-wrap">
-        <img src="${product.image}" alt="${product.title}" loading="lazy">
-        ${product.rating >= 4.8 ? `<div class="amz-choice-tag" style="position: absolute; top: 12px; left: 12px; z-index: 2;"><i class="fa-solid fa-check"></i> sexToys Choice</div>` : ''}
-        ${product.decibels > 0 ? `<div class="noise-badge" style="top: ${product.rating >= 4.8 ? '40px' : '12px'};"><i class="fa-solid fa-volume-xmark"></i> ${product.decibels} dB Quiet</div>` : ''}
-        <button class="wishlist-btn-card ${state.wishlist.has(product.id) ? 'active' : ''}" onclick="toggleWishlist('${product.id}')">
-          <i class="${state.wishlist.has(product.id) ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
-        </button>
-      </div>
+  grid.innerHTML = filtered.map(product => {
+    const mainImg = Array.isArray(product.image_url) && product.image_url.length > 0 ? product.image_url[0] : (product.image || 'images/placeholder.jpg');
+    const title = product.name || product.title;
+    const price = Number(product.price).toFixed(2);
+    const desc = product.description || product.shortDesc;
 
-      <div class="card-body">
-        <span class="product-category">${product.categoryName}</span>
-        <h3 class="product-title">${product.title}</h3>
-        
-        <div style="color: #febd69; font-size: 0.85rem; margin: 4px 0 8px 0; display: flex; align-items: center; gap: 4px;">
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star-half-stroke"></i>
-          <span style="color: #00a8e8; margin-left: 4px;">${product.rating} (${product.reviews})</span>
+    return `
+      <div class="product-card">
+        <div class="card-image-wrap">
+          <img src="${mainImg}" alt="${title}" loading="lazy" onerror="handleImageError(this)">
+          ${product.rating >= 4.8 ? `<div class="amz-choice-tag" style="position: absolute; top: 12px; left: 12px; z-index: 2;"><i class="fa-solid fa-check"></i> sexToys Choice</div>` : ''}
+          ${product.decibels > 0 ? `<div class="noise-badge" style="top: ${product.rating >= 4.8 ? '40px' : '12px'};"><i class="fa-solid fa-volume-xmark"></i> ${product.decibels} dB Quiet</div>` : ''}
+          <button class="wishlist-btn-card ${state.wishlist.has(product.id) ? 'active' : ''}" onclick="toggleWishlist('${product.id}')">
+            <i class="${state.wishlist.has(product.id) ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+          </button>
         </div>
 
-        <p class="product-desc">${product.shortDesc}</p>
+        <div class="card-body">
+          <span class="product-category">${product.categoryName}</span>
+          <h3 class="product-title">${title}</h3>
+          
+          <div style="color: #febd69; font-size: 0.85rem; margin: 4px 0 8px 0; display: flex; align-items: center; gap: 4px;">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star-half-stroke"></i>
+            <span style="color: #00a8e8; margin-left: 4px;">${product.rating} (${product.reviews})</span>
+          </div>
 
-        <div class="amz-prime-tag">
-          <i class="fa-solid fa-truck-fast"></i> <strong style="color: #febd69;">prime</strong> <span style="font-weight: 400; color: #ccc; font-size: 0.78rem;">FREE One-Day Discreet Shipping</span>
-        </div>
+          <p class="product-desc">${desc}</p>
 
-        <div class="card-footer-row" style="margin-top: 14px;">
-          <span class="product-price" style="color: #febd69;">$${product.price.toFixed(2)}</span>
-          <div class="card-action-btns">
-            <button class="btn btn-secondary btn-sm" onclick="openQuickView('${product.id}')" title="View High-Res Image & Details">
-              <i class="fa-solid fa-image"></i> View Details
-            </button>
+          <div class="amz-prime-tag">
+            <i class="fa-solid fa-truck-fast"></i> <strong style="color: #febd69;">prime</strong> <span style="font-weight: 400; color: #ccc; font-size: 0.78rem;">FREE One-Day Discreet Shipping</span>
+          </div>
+
+          <div class="card-footer-row" style="margin-top: 14px;">
+            <span class="product-price" style="color: #febd69;">$${price}</span>
+            <div class="card-action-btns">
+              <button class="btn btn-secondary btn-sm" onclick="openQuickView('${product.id}')" title="View High-Res Multi-Image Gallery & Details">
+                <i class="fa-solid fa-images"></i> View Details
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
-// --- Quick View Modal ---
+// --- Quick View Modal with Multi-Image Gallery ---
 function openQuickView(productId) {
   const product = products.find(p => p.id === productId);
   if (!product) return;
@@ -950,32 +987,63 @@ function openQuickView(productId) {
   const modalBackdrop = document.getElementById('productModalBackdrop');
   const modalGrid = document.getElementById('modalGridContent');
 
+  const title = product.name || product.title;
+  const price = Number(product.price).toFixed(2);
+  const desc = product.description || product.longDesc;
+
+  const images = Array.isArray(product.image_url) && product.image_url.length > 0
+    ? product.image_url
+    : [product.image || 'images/placeholder.jpg'];
+
   modalGrid.innerHTML = `
-    <img src="${product.image}" alt="${product.title}">
+    <div class="product-gallery-container">
+      <div class="gallery-main-view">
+        <img id="mainGalleryImg" src="${images[0]}" alt="${title}" onerror="handleImageError(this)">
+      </div>
+      <div class="gallery-thumbs-strip">
+        ${images.map((imgSrc, idx) => `
+          <img src="${imgSrc}" class="thumb-img ${idx === 0 ? 'active' : ''}" 
+               onclick="switchGalleryImage('${imgSrc}', this)" onerror="handleImageError(this)" alt="Thumbnail ${idx + 1}">
+        `).join('')}
+      </div>
+    </div>
+
     <div class="modal-product-info">
       <span class="product-category">${product.categoryName}</span>
-      <h2>${product.title}</h2>
+      <h2>${title}</h2>
       <div style="color: #febd69; margin: 8px 0; font-size: 0.9rem;">
         <i class="fa-solid fa-star"></i> ${product.rating} (${product.reviews} Customer Reviews)
       </div>
-      <p style="color: var(--color-text-muted); margin-bottom: 16px;">${product.longDesc}</p>
-      
+      <p style="color: var(--color-text-muted); margin-bottom: 16px;">${desc}</p>
+
+      <div style="background: #232f3e; color: #febd69; padding: 10px 14px; border-radius: 8px; font-size: 0.84rem; font-weight: 600; margin-bottom: 18px; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-box-open"></i> 100% Plain Unbranded Brown Box Packaging Guaranteed
+      </div>
+
       <ul style="list-style: none; font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 20px;">
-        <li><i class="fa-solid fa-check green-text"></i> Material: ${product.materialName}</li>
-        <li><i class="fa-solid fa-check green-text"></i> Sound Profile: ${product.decibels > 0 ? product.decibels + ' dB (Whisper Motor)' : 'Silent Sensation'}</li>
-        <li><i class="fa-solid fa-check green-text"></i> Waterproofing: ${product.waterproof}</li>
-        <li><i class="fa-solid fa-check green-text"></i> Packaging: Plain Unbranded Brown Box</li>
+        <li><i class="fa-solid fa-check green-text"></i> Material: ${product.material || product.materialName || 'Medical Silicone'}</li>
+        <li><i class="fa-solid fa-check green-text"></i> Stock Status: ${product.stock || 12} Units Available in Warehouse</li>
+        <li><i class="fa-solid fa-check green-text"></i> Waterproofing: ${product.waterproof || '100% Waterproof'}</li>
+        <li><i class="fa-solid fa-check green-text"></i> Billing Descriptor: Confidential ("WL BOUTIQUE LLC")</li>
       </ul>
 
-      <div style="font-size: 1.8rem; font-family: 'Inter', sans-serif; font-weight: 700; color: #febd69; margin-bottom: 20px;">$${product.price.toFixed(2)}</div>
+      <div style="font-size: 1.8rem; font-family: 'Inter', sans-serif; font-weight: 700; color: #febd69; margin-bottom: 20px;">$${price}</div>
       
       <button class="btn btn-secondary btn-block" onclick="closeQuickView();">
-        <i class="fa-solid fa-xmark"></i> Close Image Preview
+        <i class="fa-solid fa-xmark"></i> Close Product Preview
       </button>
     </div>
   `;
 
   modalBackdrop.classList.remove('hidden');
+}
+
+function switchGalleryImage(src, thumbEl) {
+  const mainImg = document.getElementById('mainGalleryImg');
+  if (mainImg) mainImg.src = src;
+  document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active'));
+  if (thumbEl) thumbEl.classList.add('active');
+}ssList.remove('hidden');
 }
 
 function closeQuickView() {

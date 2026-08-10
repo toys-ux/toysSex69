@@ -1,0 +1,362 @@
+[
+  {
+    "id": "prod-1",
+    "name": "Velvet Rose Dual Wand Massager",
+    "category": "vibrators",
+    "categoryName": "Vibrators & Wands",
+    "price": 149.00,
+    "rating": 4.9,
+    "reviews": 128,
+    "stock": 12,
+    "description": "Ergonomic dual-motor wand massager with silky rose pink medical silicone, 10 vibration rhythms, and 5 speed levels.",
+    "image_url": [
+      "images/vibrator1.jpg",
+      "images/rabbit.jpg",
+      "images/vibrator2.jpg"
+    ],
+    "material": "Medical Silicone & Rose Gold Metal",
+    "waterproof": "100% Waterproof (IPX7)",
+    "intensity": "10 Vibration Patterns (Whisper Motor)",
+    "discreetPackaging": true
+  },
+  {
+    "id": "prod-2",
+    "name": "Rose Quartz Sculpted Glass Wand",
+    "category": "dildos",
+    "categoryName": "Realistic & Glass Dildos",
+    "price": 119.00,
+    "rating": 4.8,
+    "reviews": 94,
+    "stock": 8,
+    "description": "Hand-blown hypoallergenic borosilicate crystal glass wand. Non-porous, spiral ribbed body suitable for hot or cold temperature play.",
+    "image_url": [
+      "images/glass_wand.jpg",
+      "images/dildo.jpg",
+      "images/dildos.jpg"
+    ],
+    "material": "Hand-Sculpted Borosilicate Glass",
+    "waterproof": "100% Waterproof (IPX8)",
+    "intensity": "Temperature Play Sensation",
+    "discreetPackaging": true
+  },
+  {
+    "id": "prod-3",
+    "name": "Synergy Touch Wireless Couples Vibe",
+    "category": "couples",
+    "categoryName": "Couples Toys",
+    "price": 179.00,
+    "rating": 5.0,
+    "reviews": 215,
+    "stock": 15,
+    "description": "C-shaped flexible medical silicone couples vibrator for simultaneous dual stimulation during intimacy with wireless remote control.",
+    "image_url": [
+      "images/couples1.jpg",
+      "images/couples2.jpg",
+      "images/couples.jpg"
+    ],
+    "material": "Medical Grade Silicone",
+    "waterproof": "100% Waterproof (IPX7)",
+    "intensity": "Dual Independent Motors",
+    "discreetPackaging": true
+  },
+  {
+    "id": "prod-4",
+    "name": "Aphrodite Pheromone Sensual Body Oil",
+    "category": "wellness",
+    "categoryName": "Lube & Sensual Wellness",
+    "price": 89.00,
+    "rating": 4.7,
+    "reviews": 164,
+    "stock": 25,
+    "description": "Luxurious botanical body massage oil infused with natural pheromones, organic jojoba, and jasmine essential oils.",
+    "image_url": [
+      "images/oils1.jpg",
+      "images/oils.jpg",
+      "images/lubricant.jpg"
+    ],
+    "material": "Organic Oils & Pheromones",
+    "waterproof": "N/A",
+    "intensity": "Sensual Skin Hydration",
+    "discreetPackaging": true
+  },
+  {
+    "id": "prod-5",
+    "name": "Aurora Rabbit Dual Climax Vibrator",
+    "category": "vibrators",
+    "categoryName": "Vibrators & Wands",
+    "price": 169.00,
+    "rating": 4.9,
+    "reviews": 182,
+    "stock": 10,
+    "description": "Dual-action rabbit vibrator featuring curved G-spot tip and flexible vibrating clitoral rabbit ears.",
+    "image_url": [
+      "images/rabbit.jpg",
+      "images/vibrator1.jpg",
+      "images/air_pulse.jpg"
+    ],
+    "material": "Silky Medical Silicone",
+    "waterproof": "100% Waterproof (IPX7)",
+    "intensity": "Dual Motors (12 Speeds)",
+    "discreetPackaging": true
+  },
+  {
+    "id": "prod-6",
+    "name": "Noir Velvet Restraint & Cuff Set",
+    "category": "accessories",
+    "categoryName": "Accessories & Bondage",
+    "price": 109.00,
+    "rating": 4.8,
+    "reviews": 88,
+    "stock": 14,
+    "description": "Plush velvet-lined wrist and ankle cuff restraints with gold hardware and quick-release safety clips.",
+    "image_url": [
+      "images/restraints.jpg",
+      "images/blindfold.jpg",
+      "images/lingerie1.jpg"
+    ],
+    "material": "Velvet & Gold Hardware",
+    "waterproof": "N/A",
+    "intensity": "Sensory Exploration",
+    "discreetPackaging": true
+  },
+  {
+    "id": "prod-10",
+    "name": "Luxe Water-Based Intimate Glide Lubricant",
+    "category": "wellness",
+    "categoryName": "Lube & Sensual Wellness",
+    "price": 39.00,
+    "rating": 4.9,
+    "reviews": 340,
+    "stock": 40,
+    "description": "Premium ultra-slick water-based lube. Hypoallergenic, toy-safe, stain-free, and easy to clean.",
+    "image_url": [
+      "images/lubricant.jpg",
+      "images/oils1.jpg",
+      "images/massage_candle.jpg"
+    ],
+    "material": "Purified Water & Hyaluronic Acid",
+    "waterproof": "Toy Safe Formula",
+    "intensity": "Long-Lasting Glide",
+    "discreetPackaging": true
+  },
+  {
+    "id": "prod-15",
+    "name": "Stallion Heated Auto-Thrust Male Masturbator",
+    "category": "masturbators",
+    categoryName: "Male Masturbators & Sleeves",
+    price: 229.00,
+    rating: 4.9,
+    reviews: 350,
+    stock": 9,
+    description": "Automated thrusting male masturbator with 10 speeds, warming core up to 104°F & textured silicone sleeve.",
+    image_url: [
+      "images/masturbator.jpg",
+      "images/custom_stroker.jpg",
+      "images/stroker.jpg"
+    ],
+    material: "TPE Inner Sleeve & ABS Casing",
+    waterproof: "Splashproof Sleeve",
+    intensity: "10 Motorized Thrust Speeds",
+    discreetPackaging: true
+  },
+  {
+    "id": "prod-23",
+    "name": "Aero Wave Touchless Air-Pulse Massager",
+    "category": "vibrators",
+    categoryName: "Vibrators & Wands",
+    price: 129.00,
+    rating: 4.9,
+    reviews: 298,
+    stock": 18,
+    description": "Contactless air-pulse clitoral wave massager providing gentle sonic suction waves without direct contact.",
+    image_url: [
+      "images/air_pulse.jpg",
+      "images/vibrator2.jpg",
+      "images/vibrator1.jpg"
+    ],
+    material: "Medical Silicone & Rose Gold Trim",
+    waterproof: "100% Waterproof (IPX7)",
+    intensity: "11 Air Wave Intensity Levels",
+    discreetPackaging: true
+  },
+  {
+    "id": "prod-24",
+    "name": "Siren Jeweled Stainless Steel Anal Plug",
+    "category": "anal",
+    categoryName: "Anal Sex Toys & Plugs",
+    price: 65.00,
+    rating: 4.9,
+    reviews: 178,
+    stock": 16,
+    description": "Sleek weighted metal anal plug adorned with a sparkling rose gold crystal teardrop gem base.",
+    image_url: [
+      "images/jeweled_plug.jpg",
+      "images/anal_toy.jpg",
+      "images/butt_plug.jpg"
+    ],
+    material: "Polished Stainless Steel & Crystal Gem",
+    waterproof: "100% Waterproof (IPX8)",
+    intensity: "Weighted & Temperature Play",
+    discreetPackaging: true
+  },
+  {
+    "id": "prod-26",
+    "name": "Kama Sutra Glow-in-the-Dark Fantasy Dice Game",
+    "category": "games",
+    categoryName: "Adult Games & Fantasy",
+    price: 24.99,
+    rating: 4.8,
+    reviews: 320,
+    stock": 50,
+    description": "Set of 4 luminous Kama Sutra positions & actions dice for spontaneous romantic couples play.",
+    image_url: [
+      "images/adult_games.jpg",
+      "images/couples_cards.jpg",
+      "images/couples1.jpg"
+    ],
+    material: "Luminous Acrylic & Velvet Pouch",
+    waterproof: "N/A",
+    intensity: "Spontaneous Intimate Play",
+    discreetPackaging: true
+  },
+  {
+    "id": "prod-27",
+    "name": "Naughty Desires Couples Fantasy Card Game",
+    "category": "games",
+    categoryName: "Adult Games & Fantasy",
+    price: 29.99,
+    rating: 4.9,
+    reviews: 412,
+    stock": 35,
+    description": "150 gold-foil couples intimacy prompt cards across Talk, Flirt, and Dare levels.",
+    image_url: [
+      "images/couples_cards.jpg",
+      "images/adult_games.jpg",
+      "images/couples2.jpg"
+    ],
+    material: "Linen-Finish Gold Foil Cards",
+    waterproof: "N/A",
+    intensity: "Sensual Discovery & Truth",
+    discreetPackaging: true
+  },
+  {
+    "id": "prod-28",
+    "name": "Velvet Touch RealFeel Dual-Layer Dildo",
+    "category": "dildos",
+    categoryName: "Realistic & Glass Dildos",
+    price: 89.00,
+    rating: 4.9,
+    reviews: 210,
+    stock": 14,
+    description": "7-inch dual-density medical silicone dildo with soft outer skin layer, firm inner core, and strong suction base.",
+    image_url: [
+      "images/dildos.jpg",
+      "images/glass_wand.jpg",
+      "images/dildo.jpg"
+    ],
+    material: "Dual-Layer Medical Silicone",
+    waterproof: "100% Waterproof (IPX8)",
+    intensity: "Realistic Flex & Suction Base",
+    discreetPackaging: true
+  },
+  {
+    "id": "prod-30",
+    "name": "Vortex Textured Pocket Stroker Sleeve",
+    "category": "masturbators",
+    categoryName: "Male Masturbators & Sleeves",
+    price: 49.00,
+    rating: 4.7,
+    reviews: 290,
+    stock": 22,
+    description": "Discreet pocket-sized manual male stroker sleeve with internal ribbed chamber and spiral suction nodes.",
+    image_url: [
+      "images/custom_stroker.jpg",
+      "images/stroker.jpg",
+      "images/masturbator.jpg"
+    ],
+    material: "Ultra-Flex Ribbed Silicone",
+    waterproof: "100% Waterproof (IPX8)",
+    intensity: "Compact Manual Stroker",
+    discreetPackaging: true
+  },
+  {
+    "id": "prod-32",
+    "name": "Titan Pro Hands-Free Thrusting Machine",
+    "category": "machines",
+    categoryName: "Machines & Automated Devices",
+    price: 499.00,
+    rating: 5.0,
+    reviews: 142,
+    stock": 5,
+    description": "Professional automated sex machine with multi-angle tripod stand, remote control & universal attachment arm.",
+    image_url: [
+      "images/machine.jpg",
+      "images/air_pulse.jpg",
+      "images/couples2.jpg"
+    ],
+    material: "Heavy-Duty Steel & Medical Silicone",
+    waterproof: "Attachments 100% Waterproof",
+    intensity: "0-350 RPM Variable Speed",
+    discreetPackaging: true
+  },
+  {
+    "id": "prod-34",
+    "name": "Elysium Luxury TPE Intimacy Torso",
+    category: "dolls",
+    categoryName: "Sex Dolls & Torso Novelties",
+    price: 799.00,
+    rating: 4.9,
+    reviews: 86,
+    stock": 4,
+    description": "Life-like soft TPE silicone intimacy torso novelty with realistic weight, soft skin texture & dual channels.",
+    image_url: [
+      "images/doll.jpg",
+      "images/lingerie1.jpg",
+      "images/restraints.jpg"
+    ],
+    material: "Medical Grade RealFeel TPE",
+    waterproof: "100% Waterproof Channels",
+    intensity: "Full-Size Intimacy Torso",
+    discreetPackaging: true
+  },
+  {
+    "id": "prod-36",
+    "name": "Obsidian Vibrating Anal Plug with Remote",
+    category: "anal",
+    categoryName: "Anal Sex Toys & Plugs",
+    price: 79.00,
+    rating: 4.8,
+    reviews: 215,
+    stock": 19,
+    description": "Tapered silicone anal plug with powerful rumbling motor, ergonomic flared base & 30ft wireless remote.",
+    image_url: [
+      "images/anal_toy.jpg",
+      "images/jeweled_plug.jpg",
+      "images/butt_plug.jpg"
+    ],
+    material: "Silky Touch Silicone & Wireless Remote",
+    waterproof: "100% Waterproof (IPX7)",
+    intensity: "12 Rumbling Vibe Modes",
+    discreetPackaging: true
+  },
+  {
+    "id": "prod-38",
+    "name": "Scarlet Velvet Vibrating Nipple Clamps",
+    category: "nipples",
+    categoryName: "Nipple Toys & Clamps",
+    price: 45.00,
+    rating: 4.7,
+    reviews: 142,
+    stock": 28,
+    description": "Pair of rubber-padded vibrating nipple clamps connected by a gold chain with 7 vibration speeds.",
+    image_url: [
+      "images/nipple_toy.jpg",
+      "images/blindfold.jpg",
+      "images/restraints.jpg"
+    ],
+    material: "Rubber-Tipped Clamps & Gold Chain",
+    waterproof: "Splashproof",
+    intensity: "Adjustable Pinch & 7 Vibe Modes",
+    discreetPackaging: true
+  }
+]

@@ -2350,6 +2350,131 @@ body.theme-amazon {
   font-weight: 700;
 }
 
+/* --- 18+ Age Gate Verification Overlay Modal --- */
+.age-gate-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 14, 18, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.age-gate-backdrop.verified {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.age-gate-card {
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  padding: 40px 30px;
+  background: #192028;
+  border: 1px solid #febd69;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(254, 189, 105, 0.2);
+}
+
+.age-gate-icon {
+  font-size: 3rem;
+  color: #febd69;
+  margin-bottom: 16px;
+}
+
+.age-gate-card h2 {
+  font-size: 1.6rem;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.age-gate-card p {
+  font-size: 0.95rem;
+  color: #aaa;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.age-gate-discreet-note {
+  background: #232f3e;
+  color: #febd69;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.age-gate-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* --- Multi-Image Gallery & Thumbnail Strip --- */
+.product-gallery-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gallery-main-view {
+  position: relative;
+  width: 100%;
+  height: 340px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #131921;
+  border: 1px solid #2d3b47;
+}
+
+.gallery-main-view img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.25s ease;
+}
+
+.gallery-thumbs-strip {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.thumb-img {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid #2d3b47;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.thumb-img:hover,
+.thumb-img.active {
+  opacity: 1;
+  border-color: #febd69;
+  transform: scale(1.05);
+}
+
 @media (max-width: 1200px) {
   .amazon-quad-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -2357,5 +2482,7 @@ body.theme-amazon {
 @media (max-width: 768px) {
   .amazon-quad-grid { grid-template-columns: 1fr; }
   .amazon-search-box { display: none; }
+  .age-gate-card { padding: 30px 20px; }
+  .gallery-main-view { height: 260px; }
 }
 
