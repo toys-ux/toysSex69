@@ -84,12 +84,6 @@
           <span class="badge" id="wishlistBadge">0</span>
         </button>
 
-        <!-- Shopping Cart Trigger -->
-        <button class="icon-action-btn cart-trigger" id="cartToggleBtn" title="Open Shopping Cart">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <span class="badge" id="cartBadge">0</span>
-        </button>
-
         <!-- Mobile Menu Toggle -->
         <button class="mobile-menu-btn" id="mobileMenuBtn">
           <i class="fa-solid fa-bars"></i>
@@ -484,87 +478,6 @@
       <div class="modal-grid" id="modalGridContent">
         <!-- Dynamic Quick View Content -->
       </div>
-    </div>
-  </div>
-
-  <!-- Shopping Cart Drawer -->
-  <div class="cart-drawer-overlay" id="cartDrawer">
-    <div class="cart-drawer-panel">
-      <div class="cart-header flex-between">
-        <h3><i class="fa-solid fa-cart-shopping"></i> Shopping Cart</h3>
-        <button class="close-cart-btn" id="closeCartBtn"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-
-      <div class="cart-discreet-alert">
-        <i class="fa-solid fa-shield-halved"></i> 100% Plain Unbranded Box Shipping Guaranteed
-      </div>
-
-      <div class="cart-items-list" id="cartItemsList">
-        <!-- Dynamic Cart Items -->
-      </div>
-
-      <div class="cart-footer">
-        <div class="cart-summary-row flex-between">
-          <span>Subtotal:</span>
-          <span class="cart-subtotal-price" id="cartSubtotal">$0.00</span>
-        </div>
-        <div class="free-shipping-progress">
-          <div class="progress-text" id="shippingProgressText">Add $75.00 for FREE Express Shipping</div>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar-fill" id="shippingProgressBar" style="width: 0%;"></div>
-          </div>
-        </div>
-        <button class="btn btn-primary btn-block btn-glow btn-lg" id="checkoutBtn">
-          <i class="fa-solid fa-lock"></i> Proceed to Discreet Checkout
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Discreet Checkout Modal -->
-  <div class="modal-backdrop hidden" id="checkoutModalBackdrop">
-    <div class="modal-card checkout-card glass-panel">
-      <button class="close-modal-btn" id="closeCheckoutBtn"><i class="fa-solid fa-xmark"></i></button>
-      
-      <div class="checkout-header text-center">
-        <h2><i class="fa-solid fa-lock green-text"></i> Discreet Secure Checkout</h2>
-        <p>Order processed under discreet billing descriptor: <strong>"WL BOUTIQUE LLC"</strong></p>
-      </div>
-
-      <form id="checkoutForm" onsubmit="event.preventDefault(); handleCheckoutSubmit();">
-        <div class="form-group">
-          <label>Shipping Address (Plain Unbranded Box):</label>
-          <input type="text" placeholder="Full Name & Street Address" required>
-        </div>
-        
-        <div class="form-row-2">
-          <div class="form-group">
-            <label>City &amp; Zip:</label>
-            <input type="text" placeholder="City, State, Zip Code" required>
-          </div>
-          <div class="form-group">
-            <label>Delivery Method:</label>
-            <select>
-              <option>FREE Express Discreet Delivery (1-2 Days)</option>
-              <option>Overnight Express Discreet ($9.99)</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Payment Method:</label>
-          <input type="text" placeholder="Card Number (0000 0000 0000 0000)" required>
-        </div>
-
-        <div class="checkout-summary-box flex-between">
-          <span>Total Charged to Card:</span>
-          <span class="checkout-final-amount">$<span id="checkoutTotalAmount">0.00</span></span>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-block btn-lg btn-glow">
-          <i class="fa-solid fa-check"></i> Place Discreet Order
-        </button>
-      </form>
     </div>
   </div>
 

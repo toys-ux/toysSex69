@@ -728,11 +728,8 @@ function renderProducts() {
         <div class="card-footer-row" style="margin-top: 14px;">
           <span class="product-price" style="color: #febd69;">$${product.price.toFixed(2)}</span>
           <div class="card-action-btns">
-            <button class="btn-icon-sq" onclick="openQuickView('${product.id}')" title="Quick View">
-              <i class="fa-solid fa-eye"></i>
-            </button>
-            <button class="btn-icon-sq" style="background: #febd69; color: #111;" onclick="addToCart('${product.id}')" title="Add to Cart">
-              <i class="fa-solid fa-cart-plus"></i>
+            <button class="btn btn-secondary btn-sm" onclick="openQuickView('${product.id}')" title="View High-Res Image & Details">
+              <i class="fa-solid fa-image"></i> View Details
             </button>
           </div>
         </div>
@@ -754,7 +751,7 @@ function openQuickView(productId) {
     <div class="modal-product-info">
       <span class="product-category">${product.categoryName}</span>
       <h2>${product.title}</h2>
-      <div style="color: var(--color-gold-light); margin: 8px 0; font-size: 0.9rem;">
+      <div style="color: #febd69; margin: 8px 0; font-size: 0.9rem;">
         <i class="fa-solid fa-star"></i> ${product.rating} (${product.reviews} Customer Reviews)
       </div>
       <p style="color: var(--color-text-muted); margin-bottom: 16px;">${product.longDesc}</p>
@@ -766,10 +763,10 @@ function openQuickView(productId) {
         <li><i class="fa-solid fa-check green-text"></i> Packaging: Plain Unbranded Brown Box</li>
       </ul>
 
-      <div style="font-size: 1.8rem; font-family: var(--font-serif); font-weight: 700; margin-bottom: 20px;">$${product.price.toFixed(2)}</div>
+      <div style="font-size: 1.8rem; font-family: 'Inter', sans-serif; font-weight: 700; color: #febd69; margin-bottom: 20px;">$${product.price.toFixed(2)}</div>
       
-      <button class="btn btn-primary btn-glow btn-block" onclick="addToCart('${product.id}'); closeQuickView();">
-        <i class="fa-solid fa-bag-shopping"></i> Add to Discrete Selection
+      <button class="btn btn-secondary btn-block" onclick="closeQuickView();">
+        <i class="fa-solid fa-xmark"></i> Close Image Preview
       </button>
     </div>
   `;
@@ -1034,33 +1031,37 @@ function initSearch() {
   });
 }
 
-// --- Cart & Wishlist System ---
+// --- Wishlist System ---
 function initCart() {
   const cartToggleBtn = document.getElementById('cartToggleBtn');
   const closeCartBtn = document.getElementById('closeCartBtn');
   const cartOverlay = document.getElementById('cartOverlay');
 
-  cartToggleBtn.addEventListener('click', () => {
-    cartOverlay.classList.remove('hidden');
-  });
+  if (cartToggleBtn && cartOverlay) {
+    cartToggleBtn.addEventListener('click', () => {
+      cartOverlay.classList.remove('hidden');
+    });
+  }
 
-  closeCartBtn.addEventListener('click', () => {
-    cartOverlay.classList.add('hidden');
-  });
+  if (closeCartBtn && cartOverlay) {
+    closeCartBtn.addEventListener('click', () => {
+      cartOverlay.classList.add('hidden');
+    });
+  }
 
-  document.getElementById('checkoutBtn').addEventListener('click', () => {
-    if (state.cart.length === 0) {
-      showToast('Your selection is empty');
-      return;
-    }
-    cartOverlay.classList.add('hidden');
-    document.getElementById('checkoutModalBackdrop').classList.remove('hidden');
-    updateCheckoutTotal();
-  });
-
-  document.getElementById('closeCheckoutBtn').addEventListener('click', () => {
-    document.getElementById('checkoutModalBackdrop').classList.add('hidden');
-  });
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+      if (state.cart.length === 0) {
+        showToast('Your selection is empty');
+        return;
+      }
+      if (cartOverlay) cartOverlay.classList.add('hidden');
+      const checkoutModal = document.getElementById('checkoutModalBackdrop');
+      if (checkoutModal) checkoutModal.classList.remove('hidden');
+      updateCheckoutTotal();
+    });
+  }
 }
 
 function toggleWishlist(productId) {
@@ -1071,96 +1072,27 @@ function toggleWishlist(productId) {
     state.wishlist.add(productId);
     showToast('<i class="fa-solid fa-heart"></i> Added to Private Wishlist');
   }
-  document.getElementById('wishlistBadge').textContent = state.wishlist.size;
+  const badge = document.getElementById('wishlistBadge');
+  if (badge) badge.textContent = state.wishlist.size;
   renderProducts();
 }
 
 function addToCart(productId) {
-  const existing = state.cart.find(item => item.id === productId);
-  if (existing) {
-    existing.qty += 1;
-  } else {
-    const product = products.find(p => p.id === productId);
-    state.cart.push({ ...product, qty: 1 });
-  }
-
-  updateCartUI();
-  showToast('<i class="fa-solid fa-bag-shopping"></i> Item added to Discrete Selection');
+  showToast('<i class="fa-solid fa-check"></i> Product Selected');
 }
 
-function updateCartQty(productId, delta) {
-  const item = state.cart.find(i => i.id === productId);
-  if (!item) return;
+function updateCartQty(productId, delta) {}
 
-  item.qty += delta;
-  if (item.qty <= 0) {
-    state.cart = state.cart.filter(i => i.id !== productId);
-  }
-  updateCartUI();
-}
+function updateCartUI() {}
 
-function updateCartUI() {
-  const badge = document.getElementById('cartBadge');
-  const list = document.getElementById('cartItemsList');
-  const subtotalEl = document.getElementById('cartSubtotal');
-  const totalEl = document.getElementById('cartTotal');
-  const shippingFill = document.getElementById('shippingProgressFill');
-  const shippingText = document.getElementById('shippingProgressText');
+function updateCheckoutTotal() {}
 
-  const totalItems = state.cart.reduce((acc, item) => acc + item.qty, 0);
-  const subtotal = state.cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-
-  badge.textContent = totalItems;
-  subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-  totalEl.textContent = `$${subtotal.toFixed(2)}`;
-
-  // Shipping progress ($75 threshold)
-  const remaining = Math.max(0, 75 - subtotal);
-  if (remaining === 0) {
-    shippingText.textContent = '🎉 You unlocked FREE Discrete Express Shipping!';
-    shippingFill.style.width = '100%';
-  } else {
-    shippingText.textContent = `Add $${remaining.toFixed(2)} more for FREE Discrete Shipping!`;
-    shippingFill.style.width = `${Math.min(100, (subtotal / 75) * 100)}%`;
-  }
-
-  if (state.cart.length === 0) {
-    list.innerHTML = '<p style="text-align: center; color: var(--color-text-muted); margin-top: 40px;">Your discrete selection is empty.</p>';
-    return;
-  }
-
-  list.innerHTML = state.cart.map(item => `
-    <div class="cart-item">
-      <img src="${item.image}" alt="${item.title}">
-      <div class="cart-item-details">
-        <div class="cart-item-title">${item.title}</div>
-        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
-        <div class="cart-qty-controls">
-          <button class="qty-btn" onclick="updateCartQty('${item.id}', -1)">-</button>
-          <span>${item.qty}</span>
-          <button class="qty-btn" onclick="updateCartQty('${item.id}', 1)">+</button>
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-function updateCheckoutTotal() {
-  const subtotal = state.cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-  document.getElementById('checkoutTotalAmount').textContent = subtotal.toFixed(2);
-}
-
-function handleCheckoutSubmit() {
-  document.getElementById('checkoutModalBackdrop').classList.add('hidden');
-  state.cart = [];
-  updateCartUI();
-  showToast('<i class="fa-solid fa-circle-check"></i> Order Confirmed! Dispatched in Unbranded Package.');
-  alert('Thank you for your order with Wanderlust! Your transaction is processed discretely under "WL BOUTIQUE LLC".');
-}
+function handleCheckoutSubmit() {}
 
 // --- Toast Feedback Utility ---
 function showToast(message) {
   const container = document.getElementById('toastContainer');
+  if (!container) return;
   const toast = document.createElement('div');
   toast.className = 'toast';
   toast.innerHTML = message;
@@ -1228,31 +1160,5 @@ function updateBundleSummary() {
 }
 
 function addBundleToCart() {
-  const devSelect = document.getElementById('bundleDeviceSelect');
-  const lubeSelect = document.getElementById('bundleLubeSelect');
-  const accSelect = document.getElementById('bundleAccessorySelect');
-
-  const devProd = products.find(p => p.id === devSelect.value);
-  const lubeProd = products.find(p => p.id === lubeSelect.value);
-  const accProd = products.find(p => p.id === accSelect.value);
-
-  const subtotal = (devProd ? devProd.price : 0) + (lubeProd ? lubeProd.price : 0) + (accProd ? accProd.price : 0);
-  const finalPrice = subtotal * 0.85;
-
-  const bundleItem = {
-    id: `bundle-${Date.now()}`,
-    title: `VIP Intimacy Trio Bundle (${devProd ? devProd.title.split(' ')[0] : 'Device'} + ${lubeProd ? lubeProd.title.split(' ')[0] : 'Lube'} + ${accProd ? accProd.title.split(' ')[0] : 'Accessory'})`,
-    price: finalPrice,
-    image: devProd ? devProd.image : 'images/vibrator1.jpg',
-    qty: 1
-  };
-
-  state.cart.push(bundleItem);
-  updateCartUI();
-  showToast('<i class="fa-solid fa-gift"></i> VIP Trio Bundle (15% OFF) added to your selection!');
-
-  const cartDrawer = document.getElementById('cartDrawer');
-  if (cartDrawer) {
-    cartDrawer.classList.add('open');
-  }
+  showToast('<i class="fa-solid fa-gift"></i> VIP Trio Bundle (15% OFF) Selected!');
 }
