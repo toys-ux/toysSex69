@@ -450,6 +450,40 @@ const products = [
     intensity: 'Inclusive Shared Pleasure',
     shortDesc: 'Adjustable velvet-padded dual O-ring harness with flexible hollow medical silicone shaft.',
     longDesc: 'Designed for total comfort and body inclusivity. Features plush velvet-lined adjustable waist (26"-54") and leg straps, interchangeable brass O-rings, and a realistic hollow silicone shaft with textured internal walls for dual stimulation.'
+  },
+  {
+    id: 'prod-26',
+    title: 'Kama Sutra Glow-in-the-Dark Fantasy Dice Game',
+    category: 'games',
+    categoryName: 'Adult Games & Fantasy',
+    price: 24.99,
+    rating: 4.8,
+    reviews: 320,
+    image: 'images/adult_games.jpg',
+    decibels: 0,
+    material: 'satin',
+    materialName: 'Luminous Acrylic & Velvet Pouch',
+    waterproof: 'N/A',
+    intensity: 'Spontaneous Intimate Play',
+    shortDesc: 'Set of 4 luminous Kama Sutra positions & actions dice for spontaneous couples adventure.',
+    longDesc: 'Roll the dice to determine action, location, position, and duration. Crafted from premium glow-in-the-dark acrylic with rounded edges, packaged in a plush velvet satin drawstring travel pouch.'
+  },
+  {
+    id: 'prod-27',
+    title: 'Naughty Desires Couples Fantasy Card Game',
+    category: 'games',
+    categoryName: 'Adult Games & Fantasy',
+    price: 29.99,
+    rating: 4.9,
+    reviews: 412,
+    image: 'images/couples_cards.jpg',
+    decibels: 0,
+    material: 'satin',
+    materialName: 'Linen-Finish Gold Foil Cards',
+    waterproof: 'N/A',
+    intensity: 'Sensual Discovery & Truth',
+    shortDesc: '150 couples fantasy prompt cards across Talk, Flirt, and Dare intimacy levels.',
+    longDesc: 'Designed to deepen emotional and physical intimacy. 150 luxury gold-foil cards categorized into 3 levels: Talk (deep connection), Flirt (sensual touch), and Dare (spontaneous fantasy play).'
   }
 ];
 
@@ -665,7 +699,8 @@ function renderProducts() {
     <div class="product-card">
       <div class="card-image-wrap">
         <img src="${product.image}" alt="${product.title}" loading="lazy">
-        ${product.decibels > 0 ? `<div class="noise-badge"><i class="fa-solid fa-volume-xmark"></i> ${product.decibels} dB Quiet</div>` : ''}
+        ${product.rating >= 4.8 ? `<div class="amz-choice-tag" style="position: absolute; top: 12px; left: 12px; z-index: 2;"><i class="fa-solid fa-check"></i> Amazon's Choice</div>` : ''}
+        ${product.decibels > 0 ? `<div class="noise-badge" style="top: ${product.rating >= 4.8 ? '40px' : '12px'};"><i class="fa-solid fa-volume-xmark"></i> ${product.decibels} dB Quiet</div>` : ''}
         <button class="wishlist-btn-card ${state.wishlist.has(product.id) ? 'active' : ''}" onclick="toggleWishlist('${product.id}')">
           <i class="${state.wishlist.has(product.id) ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
         </button>
@@ -674,20 +709,29 @@ function renderProducts() {
       <div class="card-body">
         <span class="product-category">${product.categoryName}</span>
         <h3 class="product-title">${product.title}</h3>
-        <p class="product-desc">${product.shortDesc}</p>
-
-        <div class="product-specs-pills">
-          <span class="spec-pill"><i class="fa-solid fa-shield"></i> ${product.materialName}</span>
-          <span class="spec-pill"><i class="fa-solid fa-droplet"></i> ${product.waterproof}</span>
+        
+        <div style="color: #febd69; font-size: 0.85rem; margin: 4px 0 8px 0; display: flex; align-items: center; gap: 4px;">
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star-half-stroke"></i>
+          <span style="color: #00a8e8; margin-left: 4px;">${product.rating} (${product.reviews})</span>
         </div>
 
-        <div class="card-footer-row">
-          <span class="product-price">$${product.price.toFixed(2)}</span>
+        <p class="product-desc">${product.shortDesc}</p>
+
+        <div class="amz-prime-tag">
+          <i class="fa-solid fa-truck-fast"></i> <strong style="color: #febd69;">prime</strong> <span style="font-weight: 400; color: #ccc; font-size: 0.78rem;">FREE One-Day Discreet Shipping</span>
+        </div>
+
+        <div class="card-footer-row" style="margin-top: 14px;">
+          <span class="product-price" style="color: #febd69;">$${product.price.toFixed(2)}</span>
           <div class="card-action-btns">
             <button class="btn-icon-sq" onclick="openQuickView('${product.id}')" title="Quick View">
               <i class="fa-solid fa-eye"></i>
             </button>
-            <button class="btn-icon-sq" style="background: var(--color-velvet-primary);" onclick="addToCart('${product.id}')" title="Add to Cart">
+            <button class="btn-icon-sq" style="background: #febd69; color: #111;" onclick="addToCart('${product.id}')" title="Add to Cart">
               <i class="fa-solid fa-cart-plus"></i>
             </button>
           </div>
