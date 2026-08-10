@@ -845,31 +845,35 @@ function initDiscreetMode() {
   function enableDiscreetMode() {
     state.isDiscreetMode = true;
     document.body.classList.add('theme-discreet');
-    discreetBanner.classList.remove('hidden');
-    brandTitle.textContent = 'LUMINA';
-    brandSubtext.textContent = 'BOTANICAL SPA & HOME FRAGRANCE';
-    heroTitle.innerHTML = 'Elevate Your Home & <span class="gradient-text">Relaxation Sanctuary</span>';
-    heroDesc.textContent = 'Discover essential botanical oils, aromatic lavender room candles, and spa relaxation accessories designed for holistic tranquility.';
+    if (discreetBanner) discreetBanner.classList.remove('hidden');
+    if (brandTitle) brandTitle.textContent = 'LUMINA';
+    if (brandSubtext) brandSubtext.textContent = 'BOTANICAL SPA & HOME FRAGRANCE';
+    if (heroTitle) heroTitle.innerHTML = 'Elevate Your Home & <span class="gradient-text">Relaxation Sanctuary</span>';
+    if (heroDesc) heroDesc.textContent = 'Discover essential botanical oils, aromatic lavender room candles, and spa relaxation accessories.';
     showToast('<i class="fa-solid fa-user-shield"></i> Stealth Privacy Mode Activated');
   }
 
   function disableDiscreetMode() {
     state.isDiscreetMode = false;
     document.body.classList.remove('theme-discreet');
-    discreetBanner.classList.add('hidden');
-    brandTitle.textContent = 'WANDERLUST';
-    brandSubtext.textContent = 'LUXURY INTIMACY BOUTIQUE';
-    heroTitle.innerHTML = 'Awaken Your Deepest <span class="gradient-text">Fantasy & Desire</span>';
-    heroDesc.textContent = 'Immerse yourself in precision-engineered luxury vibrators, couples intimate devices, hand-sculpted wands, and pheromone oils.';
+    if (discreetBanner) discreetBanner.classList.add('hidden');
+    if (brandTitle) brandTitle.textContent = 'sexToys';
+    if (brandSubtext) brandSubtext.textContent = 'Sex Toys & Adult Games';
+    if (heroTitle) heroTitle.innerHTML = 'Sex Toys & Adult Games Storefront';
+    if (heroDesc) heroDesc.textContent = 'Browse high-definition product images of Dildos, Male Masturbators, Sex Machines, Sex Dolls, Anal Toys & Nipple Clamps.';
     showToast('Exited Stealth Mode');
   }
 
-  toggleBtn.addEventListener('click', () => {
-    if (state.isDiscreetMode) disableDiscreetMode();
-    else enableDiscreetMode();
-  });
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      if (state.isDiscreetMode) disableDiscreetMode();
+      else enableDiscreetMode();
+    });
+  }
 
-  disableBtn.addEventListener('click', disableDiscreetMode);
+  if (disableBtn) {
+    disableBtn.addEventListener('click', disableDiscreetMode);
+  }
 }
 
 // --- Product Catalog Engine ---
@@ -904,20 +908,29 @@ function initCatalog() {
   });
 
   // Dropdown filters
-  document.getElementById('materialFilter').addEventListener('change', (e) => {
-    state.activeMaterial = e.target.value;
-    renderProducts();
-  });
+  const matFilter = document.getElementById('materialFilter');
+  if (matFilter) {
+    matFilter.addEventListener('change', (e) => {
+      state.activeMaterial = e.target.value;
+      renderProducts();
+    });
+  }
 
-  document.getElementById('noiseFilter').addEventListener('change', (e) => {
-    state.activeNoise = e.target.value;
-    renderProducts();
-  });
+  const noiseFilter = document.getElementById('noiseFilter');
+  if (noiseFilter) {
+    noiseFilter.addEventListener('change', (e) => {
+      state.activeNoise = e.target.value;
+      renderProducts();
+    });
+  }
 
-  document.getElementById('sortSelect').addEventListener('change', (e) => {
-    state.sortBy = e.target.value;
-    renderProducts();
-  });
+  const sortSelect = document.getElementById('sortSelect');
+  if (sortSelect) {
+    sortSelect.addEventListener('change', (e) => {
+      state.sortBy = e.target.value;
+      renderProducts();
+    });
+  }
 }
 
 function renderProducts() {
@@ -1284,43 +1297,57 @@ function initSearch() {
   const input = document.getElementById('searchInput');
   const resultsList = document.getElementById('searchResultsList');
 
-  searchBtn.addEventListener('click', () => {
-    overlay.classList.remove('hidden');
-    input.focus();
-  });
+  if (searchBtn && overlay && input) {
+    searchBtn.addEventListener('click', () => {
+      overlay.classList.remove('hidden');
+      input.focus();
+    });
+  }
 
-  closeBtn.addEventListener('click', () => {
-    overlay.classList.add('hidden');
-  });
+  if (closeBtn && overlay) {
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.add('hidden');
+    });
+  }
 
-  input.addEventListener('input', (e) => {
-    const query = e.target.value.toLowerCase().trim();
-    if (!query) {
-      resultsList.innerHTML = '';
-      return;
-    }
+  if (input && resultsList) {
+    input.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      if (!query) {
+        resultsList.innerHTML = '';
+        return;
+      }
 
-    const matches = products.filter(p => 
-      p.title.toLowerCase().includes(query) || 
-      p.shortDesc.toLowerCase().includes(query) ||
-      p.materialName.toLowerCase().includes(query)
-    );
+      const matches = products.filter(p => {
+        const title = (p.name || p.title || '').toLowerCase();
+        const desc = (p.description || p.shortDesc || '').toLowerCase();
+        const mat = (p.material || p.materialName || '').toLowerCase();
+        return title.includes(query) || desc.includes(query) || mat.includes(query);
+      });
 
-    resultsList.innerHTML = matches.map(p => `
-      <div style="display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); align-items: center; cursor: pointer;" onclick="openQuickView('${p.id}'); document.getElementById('searchOverlay').classList.add('hidden');">
-        <img src="${p.image}" style="width: 50px; height: 50px; border-radius: 8px; object-fit: cover;">
-        <div>
-          <h5 style="color: #fff;">${p.title}</h5>
-          <span style="font-size: 0.8rem; color: var(--color-gold-light);">$${p.price.toFixed(2)}</span>
-        </div>
-      </div>
-    `).join('');
-  });
+      resultsList.innerHTML = matches.map(p => {
+        const img = Array.isArray(p.image_url) && p.image_url.length > 0 ? p.image_url[0] : (p.image || 'images/placeholder.jpg');
+        const title = p.name || p.title;
+        const price = Number(p.price).toFixed(2);
+        return `
+          <div style="display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); align-items: center; cursor: pointer;" onclick="openQuickView('${p.id}'); document.getElementById('searchOverlay').classList.add('hidden');">
+            <img src="${img}" style="width: 50px; height: 50px; border-radius: 8px; object-fit: cover;" onerror="handleImageError(this)">
+            <div>
+              <h5 style="color: #fff;">${title}</h5>
+              <span style="font-size: 0.8rem; color: #febd69;">$${price}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    });
+  }
 
   document.querySelectorAll('.tag-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
-      input.value = e.target.dataset.search;
-      input.dispatchEvent(new Event('input'));
+      if (input) {
+        input.value = e.target.dataset.search || '';
+        input.dispatchEvent(new Event('input'));
+      }
     });
   });
 }
